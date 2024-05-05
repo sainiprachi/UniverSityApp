@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.universityapp.databinding.UniversityListBinding
 import com.universityapp.model.University
 
-class UniversityListAdapter (private val universityList : List<University>,private val onClickListener: OnClickListener ) : RecyclerView.Adapter<UniversityListAdapter.ItemViewHolder>() {
+class UniversityListAdapter (private val universityList : List<University> ,private  val onClickListener: OnClickListener) : RecyclerView.Adapter<UniversityListAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(val binding : UniversityListBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -19,8 +19,10 @@ class UniversityListAdapter (private val universityList : List<University>,priva
     override fun onBindViewHolder(holder: ItemViewHolder, @SuppressLint("RecyclerView") position: Int) {
         with(holder){
             with(universityList[position]){
-                binding.tvUniversityName.text  = this.name?.trim()
+                binding.tvUniversityName.text  = this.name.trim()
                 binding.tvUniversityState.text = this.country?.trim()
+                holder.itemView.setOnClickListener { onClickListener.onClick(universityList[position]) }
+
             }
         }
 
